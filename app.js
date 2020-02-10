@@ -50,11 +50,11 @@ function calculateResults() {
         // TOTAL PAYMENT
         var totalResult = (monthly * calculatedPayments).toFixed(2);
         var totalFormatted = thousands_separators(totalResult);
-        monthlyPayment.value = totalFormatted
-        console.log(totalFormatted);    
+        totalPayment.value = totalFormatted
+        console.log(totalFormatted);
 
         // TOTAL INTEREST
-        totalInterest.value = ((monthly * calculatedPayments) - principal).toFixed(2);
+        totalInterest.value = (((monthly * calculatedPayments) - principal) / 1000).toFixed(2);
 
         // SHOW RESULTS
         document.getElementById("results").style.display = "block";
@@ -62,7 +62,7 @@ function calculateResults() {
         document.getElementById("loading").style.display = "none";
 
     } else {
-        showError("Please check that all fields are filled out")
+        showError("Please check that all fields are completed")
     }
 }
 
