@@ -1,3 +1,9 @@
+// SUBMIT
+document.getElementById("loan-form").addEventListener("submit", calculateResults);
+
+// RESULTS
+function calculateResults(e) {
+
 // VARIALBES
 const amount = document.getElementById("amount");
 const interest = document.getElementById("interest");
@@ -7,7 +13,6 @@ const totalPayment = document.getElementById("total-payment");
 const totalInterest = document.getElementById("total-interest")
 
 // VARIABLES FOR CALCULATIONS
-
 const principal = parseFloat(amount.value);
 const calculatedInterest = parseFloat(interest.value) / 100 / 12;
 const calculatedPayments = parseFloat(years.value) * 12;
@@ -21,60 +26,21 @@ if(isFinite(monthly)){
     totalPayment.value = (monthly * calculatedPayments).toFixed(2);
     totalInterest.value = ((monthly* calculatedPayments) - principal).toFixed(2);
 }else{
-    console.log("please check your numbers")
+    showError("Please check your numbers")
 }
-
-// SUBMIT
-document.getElementById("loan-form").addEventListener("submit", calculateResults)
-
-// RESULTS
-function calculateResults(e) {
-    console.log("calculating")
     e.preventDefault()
 }
 
-
-// // TOTAL INTEREST CALCULATION
-// function interestCalc(interest) {
-//     let newInterest = interest * .01
-//     // I = PRT
-
-//     totalInterest = amount * newInterest * years
-//     totalInterest.innerHTML = totalInterest
-
-
-// }
-// console.log(interestCalc(10))
-
-
-// // TOTAL PAYMENT CALCULATION
-
-// function totalCalc(amount) {
-//     let newPayment;
-//     newPayment = amount + interestCalc()
-
-// }
-
-// // MONTHLY PAYMENT
-
-// function monthlyCalc(years) {
-//     let monthlyPay;
-//     monthlyPay = Math.floor(totalCalc() / 12)
-//     monthlyPay.innerHTML = monthlyPay
-// }
-
-
-// // ROLL UP
-// submit.addEventListener("click", function rollUp() {
-//     interestCalc();
-//     paymentCalc();
-//     monthlyCalc();
-
-//     submit.addEventListener("click", function () {
-//         event.preventDefault()
-//     })
-
-// })
-
-
-
+function showError(error){
+    // CREATE A DIV
+    const errorDiv = document.createElement("div");
+    // GET ELEMENTS
+    const card = document.querySelector(".card");
+    const heading = document.querySelector(".heading")
+    // ADD CLASS
+    errorDiv.className = "alert alert-danger";
+    // CREATE TEXT NODE AND APPEND TO DIV
+    errorDiv.appendChild(document.createTextNode(error));
+    // INSERT ERROR BEFORE HEADING
+    card.insertBefore(errorDiv, heading);
+}
