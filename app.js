@@ -1,8 +1,17 @@
 // SUBMIT
-document.getElementById("loan-form").addEventListener("submit", calculateResults);
+document.getElementById("loan-form").addEventListener("submit", function(e){
+    // HIDE RESULTS
+    document.getElementById("results").style.display = "none";
+
+    // SHOW LOADING
+    document.getElementById("loading").style.display = "block";   
+    setTimeout(calculateResults, 2000) ;
+    
+    e.preventDefault()
+});
 
 // RESULTS
-function calculateResults(e) {
+function calculateResults() {
 
 // VARIALBES
 const amount = document.getElementById("amount");
@@ -28,7 +37,6 @@ if(isFinite(monthly)){
 }else{
     showError("Please check your numbers")
 }
-    e.preventDefault()
 }
 
 function showError(error){
@@ -43,4 +51,10 @@ function showError(error){
     errorDiv.appendChild(document.createTextNode(error));
     // INSERT ERROR BEFORE HEADING
     card.insertBefore(errorDiv, heading);
+    // CLEAR ERROR AFTER 3 SECONDS
+    setTimeout(clearError, 3000)
+}
+// CLEAR ERROR
+function clearError(){
+    document.querySelector(".alert").remove();
 }
